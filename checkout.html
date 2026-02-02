@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Success</title>
+</head>
+<body style="text-align:center; font-family:Arial; padding:50px;">
+
+    <h1>🎉 Order Placed Successfully!</h1>
+
+    <h3>Items Purchased:</h3>
+    <ul style="list-style:none;">
+        {% for item in items %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Total Paid: ₹{{ total }}</h2>
+
+    <a href="/">
+        <button style="padding:10px 20px;">Continue Shopping</button>
+    </a>
+
+</body>
+</html>

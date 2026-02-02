@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Amazon Clone</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<div class="navbar">
+
+    <h2 class="logo">🛒 Amazon Clone</h2>
+
+    <!-- SEARCH -->
+    <form method="POST" class="search-bar">
+        <input type="text" name="search" placeholder="Search products">
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- CART COUNT -->
+    <h3 class="cart-icon">
+        🛍 Cart ({{ cart_count }})
+    </h3>
+
+</div>
+
+
+<!-- ================= MAIN ================= -->
+<div class="main-container">
+
+    <!-- ================= PRODUCTS ================= -->
+    <div class="products">
+
+        {% for product in products %}
+        <div class="card">
+
+            <img src="{{ url_for('static', filename=product.img) }}">
+
+            <h3>{{ product.name }}</h3>
+            <p>₹{{ product.price }}</p>
+
+            <form action="/add-to-cart" method="POST">
+                <input type="hidden" name="name" value="{{ product.name }}">
+                <button class="add-btn">Add to Cart</button>
+            </form>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+
+
+    <!-- ================= CART SECTION ================= -->
+    <div class="cart">
+
+        <h2>Cart Items</h2>
+
+        {% if cart %}
+
+            <ul>
+                {% for item in cart %}
+                <li>
+
+                    {{ item }}
+
+                    <form action="/remove-from-cart" method="POST" style="display:inline;">
+                        <input type="hidden" name="name" value="{{ item }}">
+                        <button class="remove-btn">❌</button>
+                    </form>
+
+                </li>
+                {% endfor %}
+            </ul>
+
+            <h3 class="total">Total: ₹{{ total }}</h3>
+            <a href = "/checkout">
+
+            
+            
+                <button class="/checkout-btn">Checkout</button>
+            </a>
+
+            <a href="/clear-cart">
+                <button class="clear-btn">Clear Cart</button>
+            </a>
+
+        {% else %}
+            <p>Cart is empty</p>
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
